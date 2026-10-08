@@ -189,7 +189,7 @@ Goal: by the end, I can design and build a TUI on my own. Each lesson is: concep
 
 **L1 — How terminals work.** Cooked vs raw mode, `termios`, ANSI escape codes, the alternate screen, why programs must restore terminal state on exit. Exercise: a ~30-line raw-mode program by hand, with no library, that reads keys and redraws a line.
 
-**L2 — FTXUI's model.** Elements (immutable render tree) vs Components (state + event handling), the render loop, `ScreenInteractive`. Exercise: render a static mockup of the drill screen from `docs/design.md`.
+**L2 — FTXUI's model.** Elements (immutable render tree) vs Components (state + event handling), the render loop, `App` (named `ScreenInteractive` before FTXUI v7). Exercise: render a static mockup of the drill screen from `docs/design.md`.
 
 **L3 — Input.** `CatchEvent`, building a custom answer field (digits, `.`, `/`, `%`, `-`, backspace), auto-advance on correct, Enter and Tab behaviour.
 
