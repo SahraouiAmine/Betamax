@@ -1,10 +1,8 @@
-# Zeta (working name) — Stage 1
+# Betamax — Stage 1
 
 A terminal mental-math trainer in C++. Stage 1 delivers a tool my friends can install with Homebrew and use daily: Zetamac-style arithmetic plus higher-level problems (percentages, fractions, expected value, probability), precise timing, local session history, and a stats view.
 
 Stage 2 (later, not in scope here) adds a small fine-tuned language model that rewrites structured problems into varied natural-language wording, running locally inside the binary. Stage 1 must leave clean seams for it (see "Stage 2 seams").
-
-Rename the project before the first public release.
 
 ---
 
@@ -124,10 +122,17 @@ docs/
    - Fractions: fraction ↔ decimal ↔ percent conversion
    - Expected value: dice, coins, simple lotteries
    - Probability: simple events with dice, coins, cards, urns
-2. **Accepted answer formats** (needed for M1). Proposed: integers, finite decimals, fractions `a/b`, and `x%` where the problem asks for a percent. Non-terminating answers (e.g. 1/6) accept the fraction, or a decimal rounded to 3 places.
+2. ~~**Accepted answer formats**~~ **Decided 2026-10-08:**
+   - Integers, finite decimals (leading zero optional: `.125` = `0.125`), fractions `a/b`.
+   - `x%` is accepted **only** when the problem asks for a percentage.
+   - Answers are always exact: no tolerance, no rounding.
+   - A value with no finite decimal form (e.g. 1/6) can only be typed as a fraction.
+   - Input is limited to **5 digits**, counting only `0`–`9` (leading zeros count: `0.0625` is 5 digits). The parser rejects longer input.
+   - Every generated answer must be typeable in 5 digits or fewer in at least one accepted form (a property test in M2).
+   - Still open: is an unreduced fraction (`2/4` for 1/2) accepted?
 3. **Input behaviour** (needed for M3). Proposed, Zetamac-like: a correct answer auto-advances on the keystroke that completes it; Enter submits a wrong answer explicitly (logged as wrong, problem stays); Tab skips (logged as skipped).
 4. **Default session**: 120 seconds, mixed types; score = number correct.
-5. **Final name.**
+5. ~~**Final name**~~ **Decided 2026-10-08:** Betamax (binary `betamax`).
 
 ---
 
@@ -136,7 +141,7 @@ docs/
 ### Rational
 - `int64_t` numerator/denominator, always normalized (gcd, positive denominator).
 - Arithmetic operators, comparison, conversion to/from finite decimal strings.
-- Overflow must be detected, not silent. Decide how (checked arithmetic or `__int128` intermediates) and record it in `docs/decisions.md`.
+- Overflow is prevented by bounding inputs, not detected at runtime: user input has at most 5 digits (see decision 2) and generators keep operands and intermediates human-sized. `Rational` documents this precondition; the `asan` preset (UBSan) catches violations in tests. Record the reasoning, including the worst-case intermediate value, in `docs/decisions.md`.
 
 ### Problem model
 ```
@@ -162,7 +167,7 @@ attempts(id, session_id, problem_type, spec_json, prompt,
          correct_answer, user_answer, outcome,      -- correct | wrong | skipped
          response_ms, shown_at)
 ```
-- Database in the platform's standard data directory (`~/.local/share/<name>/` on Linux, `~/Library/Application Support/<name>/` on macOS); Claude Code may provide the path helper.
+- Database in the platform's standard data directory (`~/.local/share/betamax/` on Linux, `~/Library/Application Support/betamax/` on macOS); Claude Code may provide the path helper.
 - Schema versioning via `PRAGMA user_version` from day one.
 - Stats queries: per-type accuracy, median response time, attempts over time, best scores.
 
@@ -173,12 +178,12 @@ Log everything from the first release. A later adaptive selector will be designe
 ## CLI surface
 
 ```
-<name>                         # default 120s mixed session
-<name> --focus ev,pct          # restrict to problem types
-<name> --duration 60
-<name> --seed 42               # reproducible session
-<name> stats                   # stats view
-<name> --version
+betamax                         # default 120s mixed session
+betamax --focus ev,pct          # restrict to problem types
+betamax --duration 60
+betamax --seed 42               # reproducible session
+betamax stats                   # stats view
+betamax --version
 ```
 
 ---
@@ -228,7 +233,7 @@ Then implement `src/tui/theme.hpp` with the constants. Keep it minimal and calm:
 | M6 | Release workflow, Homebrew tap, README with a demo GIF | Claude Code | 1h |
 
 ### Definition of done for Stage 1
-- A friend can run `brew install <tap>/<name>` and complete a 120-second session.
+- A friend can run `brew install <tap>/betamax` and complete a 120-second session.
 - All attempts are logged; `stats` shows per-type accuracy and median time.
 - CI passes on macOS and Linux, including the sanitizer job.
 - `docs/decisions.md` records the main design choices in my own words.

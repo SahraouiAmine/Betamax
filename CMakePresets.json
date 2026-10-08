@@ -24,19 +24,19 @@
       "name": "asan",
       "displayName": "Debug + ASan/UBSan",
       "inherits": "base",
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug", "ZETA_SANITIZE": "ON" }
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug", "BETAMAX_SANITIZE": "ON" }
     },
     {
       "name": "ci",
       "displayName": "CI (Release, -Werror)",
       "inherits": "base",
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "ZETA_WERROR": "ON" }
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "BETAMAX_WERROR": "ON" }
     },
     {
       "name": "ci-asan",
       "displayName": "CI (ASan/UBSan, -Werror)",
       "inherits": "asan",
-      "cacheVariables": { "ZETA_WERROR": "ON" }
+      "cacheVariables": { "BETAMAX_WERROR": "ON" }
     }
   ],
   "buildPresets": [

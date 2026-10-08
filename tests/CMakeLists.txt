@@ -4,14 +4,14 @@ file(GLOB_RECURSE test_sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.
 
 if(test_sources)
   include(Catch)
-  add_executable(zeta_tests ${test_sources})
-  target_link_libraries(zeta_tests PRIVATE
-    zeta_warnings Catch2::Catch2WithMain
-    zeta::core zeta::session zeta::store)
-  catch_discover_tests(zeta_tests)
+  add_executable(betamax_tests ${test_sources})
+  target_link_libraries(betamax_tests PRIVATE
+    betamax_warnings Catch2::Catch2WithMain
+    betamax::core betamax::session betamax::store)
+  catch_discover_tests(betamax_tests)
 endif()
 
 # Smoke test: the binary starts and reports its version.
-add_test(NAME cli.version COMMAND zeta --version)
+add_test(NAME cli.version COMMAND betamax --version)
 set_tests_properties(cli.version PROPERTIES
   PASS_REGULAR_EXPRESSION "${PROJECT_VERSION}")

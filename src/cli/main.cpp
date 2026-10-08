@@ -9,8 +9,8 @@
 #include <vector>
 
 int main(int argc, char** argv) {
-  CLI::App app{"Mental-math trainer", ZETA_APP_NAME};
-  app.set_version_flag("--version", std::string(ZETA_APP_NAME) + " " + ZETA_VERSION);
+  CLI::App app{"Mental-math trainer", BETAMAX_APP_NAME};
+  app.set_version_flag("--version", std::string(BETAMAX_APP_NAME) + " " + BETAMAX_VERSION);
 
   std::vector<std::string> focus;
   int duration_s = 120;

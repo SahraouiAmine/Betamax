@@ -1,14 +1,14 @@
 # Warnings apply only to our own targets (linked privately), never to dependencies.
-add_library(zeta_warnings INTERFACE)
-target_compile_options(zeta_warnings INTERFACE -Wall -Wextra -Wpedantic)
-if(ZETA_WERROR)
-  target_compile_options(zeta_warnings INTERFACE -Werror)
+add_library(betamax_warnings INTERFACE)
+target_compile_options(betamax_warnings INTERFACE -Wall -Wextra -Wpedantic)
+if(BETAMAX_WERROR)
+  target_compile_options(betamax_warnings INTERFACE -Werror)
 endif()
 
 # Sanitizers apply globally (set before dependencies are fetched) so that
 # third-party code is instrumented too; mixing instrumented and
 # uninstrumented code can produce false positives.
-if(ZETA_SANITIZE)
+if(BETAMAX_SANITIZE)
   add_compile_options(-fsanitize=address,undefined
                       -fno-sanitize-recover=undefined
                       -fno-omit-frame-pointer)

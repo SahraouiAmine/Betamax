@@ -17,7 +17,7 @@ FetchContent_Declare(cli11
 
 FetchContent_MakeAvailable(ftxui cli11)
 
-if(ZETA_BUILD_TESTS)
+if(BETAMAX_BUILD_TESTS)
   FetchContent_Declare(catch2
     URL https://github.com/catchorg/Catch2/archive/refs/tags/v3.16.0.tar.gz
     URL_HASH SHA256=0957cae5821b17ce07f0833aaa52b5137643a8382203221f363a8303c109af34)
@@ -29,7 +29,7 @@ endif()
 # The imported target was renamed in CMake 4.1; accept either name.
 find_package(SQLite3 REQUIRED)
 if(TARGET SQLite3::SQLite3)
-  set(ZETA_SQLITE_TARGET SQLite3::SQLite3)
+  set(BETAMAX_SQLITE_TARGET SQLite3::SQLite3)
 else()
-  set(ZETA_SQLITE_TARGET SQLite::SQLite3)
+  set(BETAMAX_SQLITE_TARGET SQLite::SQLite3)
 endif()
