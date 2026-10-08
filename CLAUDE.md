@@ -129,7 +129,7 @@ docs/
    - A value with no finite decimal form (e.g. 1/6) can only be typed as a fraction.
    - Input is limited to **5 digits**, counting only `0`–`9` (leading zeros count: `0.0625` is 5 digits). The parser rejects longer input.
    - Every generated answer must be typeable in 5 digits or fewer in at least one accepted form (a property test in M2).
-   - Still open: is an unreduced fraction (`2/4` for 1/2) accepted?
+   - A fraction must be in lower terms: '1/2' is accepted, '2/4' is not. 
 3. **Input behaviour** (needed for M3). Proposed, Zetamac-like: a correct answer auto-advances on the keystroke that completes it; Enter submits a wrong answer explicitly (logged as wrong, problem stays); Tab skips (logged as skipped).
 4. **Default session**: 120 seconds, mixed types; score = number correct.
 5. ~~**Final name**~~ **Decided 2026-10-08:** Betamax (binary `betamax`).
