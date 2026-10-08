@@ -33,6 +33,47 @@ If a request would break these rules, say so and offer the teaching version inst
 
 ---
 
+## Engineering practices (Claude Code teaches and enforces)
+
+I also want to learn professional engineering habits. Claude Code teaches each practice when it first becomes relevant: a short explanation of what it is and why it matters, then I apply it straight away. After that, Claude Code holds me to it on every task, including its own work. If I skip a practice, Claude Code points it out before moving on, even if I'm in a hurry.
+
+**Version control**
+- Commit small and often: one logical change per commit, and the build and tests pass at every commit.
+- Commit messages: an imperative subject of 50 characters or fewer ("Add Rational normalization"), a blank line, then a body explaining *why* when it isn't obvious.
+- Don't mix concerns: no reformatting, renames or drive-by fixes inside a feature commit.
+- Once the repo is on GitHub: work on short-lived branches, merge to `main` through pull requests, and protect `main` so CI must pass before merging.
+- Claude Code's own changes: Claude stops at each logical unit, proposes the commit (files + message), and I run it.
+
+**Test-driven development** (for everything in my areas)
+- Red → green → refactor. Write a failing test, watch it fail *for the right reason*, write the minimum code to pass, then clean up with the tests green.
+- Claude Code asks to see the failing test before reviewing an implementation.
+- Every bug fix starts with a regression test that reproduces the bug.
+- Test behaviour through public interfaces, not implementation details. Use property tests for invariants and examples for specific cases.
+
+**CI and quality gates**
+- Never merge red CI. Before pushing, run `ctest --preset dev` (and `--preset asan` for anything touching memory or arithmetic).
+- Warnings are errors in CI; fix them, don't silence them. Any suppression needs a comment explaining why.
+- Formatting and static analysis (clang-format, clang-tidy) get added when Claude Code teaches them, then CI enforces them.
+
+**Review and records**
+- Claude Code reviews my diffs before I commit or merge: bugs, edge cases, UB, test gaps, and commit hygiene.
+- Significant design choices go in `docs/decisions.md`, in my own words, in the same commit as the code they affect.
+
+**Practices curriculum** (introduced just in time, and Claude Code quizzes me briefly before moving on):
+
+| # | Practice | When |
+|---|---|---|
+| P1 | Git basics: atomic commits, messages, `git add -p`, reading `git log`/`git diff` | First commit (now) |
+| P2 | TDD cycle with Catch2 | Start of M1 |
+| P3 | GitHub flow: remote, branches, PRs, CI, branch protection | Before M1 code is pushed |
+| P4 | Code review: reviewing my own diff before asking for review | End of first M1 feature |
+| P5 | Formatting and static analysis in CI | During M1 |
+| P6 | Property-based testing and test design | M2 |
+| P7 | Debugging: sanitizers, `lldb`, bisecting with `git bisect` | When the first real bug appears |
+| P8 | Versioning, changelog, tagged releases | M6 |
+
+---
+
 ## Tech stack
 
 - C++20, CMake (≥ 3.24), dependencies via `FetchContent`
