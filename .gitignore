@@ -2,3 +2,10 @@
 /.cache/
 compile_commands.json
 .DS_Store
+
+# Private working agreement, kept in SahraouiAmine/betamax-private and
+# symlinked here.
+CLAUDE.md
+
+# CTest output when ctest is run outside a build directory.
+Testing/
