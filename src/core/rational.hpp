@@ -31,6 +31,10 @@ class Rational {
             return lhs + (Rational(-1) * rhs);
         }
 
+        friend Rational operator/(const Rational& lhs, const Rational& rhs) {
+            return lhs * Rational(rhs.den_, rhs.num_);
+        }
+
 
 
     private:
