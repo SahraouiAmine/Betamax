@@ -4,6 +4,7 @@
 
 // A Rational is always stored in irreducible form with a positive denominator.
 // Constructor throws "std::invalid_argument" if the denominator is 0.
+// Precondition: numerators and denominators passed to arithmetic fit in 32 bits
 class Rational {
     public:
         Rational(std::int64_t num, std::int64_t den = 1);
