@@ -24,3 +24,9 @@ TEST_CASE("Zero numerator is still reduced", "[rational]") {
     REQUIRE(r.num() == 0);
     REQUIRE(r.denom() == 1);
 }
+
+TEST_CASE("Integer input is in rational form", "[rational]") {
+    Rational r(3);
+    REQUIRE(r.num() == 3);
+    REQUIRE(r.denom() == 1);
+}
