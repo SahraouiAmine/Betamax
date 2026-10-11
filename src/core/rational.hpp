@@ -3,7 +3,7 @@
 
 class Rational {
     public:
-        Rational(int64_t, int64_t);
+        Rational(std::int64_t num, std::int64_t den = 1);
         [[nodiscard]] std::int64_t num() const;
         [[nodiscard]] std::int64_t denom() const;
 
