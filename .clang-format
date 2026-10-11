@@ -1,0 +1,16 @@
+# Formatting rules, enforced in CI. Pinned to clang-format 22.1.8 (see
+# README): other versions can format the same code differently.
+BasedOnStyle: LLVM
+IndentWidth: 4
+AccessModifierOffset: -4      # public:/private: flush with the class keyword
+ColumnLimit: 100
+PointerAlignment: Left        # int* p, not int *p
+AllowShortFunctionsOnASingleLine: Inline
+IncludeBlocks: Regroup        # project headers, then third-party, then std
+IncludeCategories:
+  - Regex: '^"'
+    Priority: 1
+  - Regex: '^<(catch2|CLI|ftxui)/'
+    Priority: 2
+  - Regex: '^<'
+    Priority: 3
