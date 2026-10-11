@@ -12,3 +12,9 @@ TEST_CASE("Irreducible fractions only, larger than unity.", "[rational]") {
     REQUIRE(r.num() == 3);
     REQUIRE(r.denom() == 2);
 }
+
+TEST_CASE("Negative must be attached to numerator", "[rational]") {
+    Rational r(1, -2);
+    REQUIRE(r.num() == -1);
+    REQUIRE(r.denom() == 2);
+}
