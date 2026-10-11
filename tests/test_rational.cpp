@@ -43,8 +43,20 @@ TEST_CASE("Rationals can be compared for equality", "[rational]") {
     REQUIRE(a == b);
 }
 
-TEST_CASE("Rational can be compared for inequality", "[rational]") {
+TEST_CASE("Rationals can be compared for inequality", "[rational]") {
     Rational a(1, 2);
     Rational b(3, 4);
     REQUIRE(a != b);
+}
+
+TEST_CASE("Rationals can be ordered", "[rational]") {
+    Rational a(1,2);
+    Rational b(3, 4);
+    Rational c(2, 4);
+    Rational d(1, 3);
+
+    REQUIRE(a < b);
+    REQUIRE(a <= c);
+    REQUIRE(a >= c);
+    REQUIRE(d < a);
 }
