@@ -1,4 +1,5 @@
 #include "rational.hpp"
+
 #include <numeric>
 #include <stdexcept>
 
