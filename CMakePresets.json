@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "cmakeMinimumRequired": { "major": 3, "minor": 24, "patch": 0 },
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
   "configurePresets": [
     {
       "name": "base",
@@ -57,5 +57,23 @@
     { "name": "asan", "inherits": "base", "configurePreset": "asan" },
     { "name": "ci", "inherits": "base", "configurePreset": "ci" },
     { "name": "ci-asan", "inherits": "base", "configurePreset": "ci-asan" }
+  ],
+  "workflowPresets": [
+    {
+      "name": "dev",
+      "steps": [
+        { "type": "configure", "name": "dev" },
+        { "type": "build", "name": "dev" },
+        { "type": "test", "name": "dev" }
+      ]
+    },
+    {
+      "name": "asan",
+      "steps": [
+        { "type": "configure", "name": "asan" },
+        { "type": "build", "name": "asan" },
+        { "type": "test", "name": "asan" }
+      ]
+    }
   ]
 }
