@@ -9,6 +9,10 @@ class Rational {
         [[nodiscard]] std::int64_t num() const;
         [[nodiscard]] std::int64_t denom() const;
 
+        friend bool operator==(const Rational& lhs, const Rational& rhs) {
+                return (lhs.num_ == rhs.num_) && (lhs.den_ == rhs.den_);
+        }
+
     private:
         std::int64_t num_;
         std::int64_t den_;
