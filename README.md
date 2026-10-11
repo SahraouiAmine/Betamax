@@ -5,19 +5,26 @@ fractions, expected value and probability, in the CLI with local stats tracking.
 
 ## Building from source
 
-Requirements: a C++20 compiler (Clang 15+ / GCC 12+), CMake ≥ 3.24, Ninja,
+Requirements: a C++20 compiler (Clang 15+ / GCC 12+), CMake ≥ 3.25, Ninja,
 and SQLite 3 (`libsqlite3-dev` on Debian/Ubuntu).
 FTXUI, CLI11 and Catch2 downloaded automatically at configure time.
 
 ```bash
-cmake --preset dev            # configure (Debug) into build/dev
-cmake --build --preset dev    # build
-ctest --preset dev            # run tests
+cmake --workflow --preset dev    # configure, build and test (Debug) in build/dev
+cmake --workflow --preset asan   # the same with AddressSanitizer + UBSan
 ./build/dev/betamax --help
 ```
 
-Other presets: `release`, `asan` (AddressSanitizer + UBSan), and `ci` /
-`ci-asan` (the same with `-Werror`, as run in GitHub Actions).
+Each workflow runs these steps, which also work on their own:
+
+```bash
+cmake --preset dev            # configure
+cmake --build --preset dev    # build
+ctest --preset dev            # run tests
+```
+
+Other presets: `release`, and `ci` / `ci-asan` (with `-Werror`, as run in
+GitHub Actions).
 
 ## Layout
 
