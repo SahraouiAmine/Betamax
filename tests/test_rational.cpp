@@ -18,3 +18,9 @@ TEST_CASE("Negative must be attached to numerator", "[rational]") {
     REQUIRE(r.num() == -1);
     REQUIRE(r.denom() == 2);
 }
+
+TEST_CASE("Zero numerator is still reduced", "[rational]") {
+    Rational r(0, 5);
+    REQUIRE(r.num() == 0);
+    REQUIRE(r.denom() == 1);
+}
