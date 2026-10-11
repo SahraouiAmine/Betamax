@@ -77,3 +77,9 @@ TEST_CASE("Rationals can be subtracted from one another","[rational]") {
     REQUIRE(Rational(1,2) - Rational(1,2) == Rational(0));
     REQUIRE(Rational(1,2) - Rational(-1,2) == Rational(1));
 }
+
+TEST_CASE("Rationals can be divided by other Rationals","[rational]") {
+    REQUIRE(Rational(1,2) / Rational(1,3) == Rational(3,2));
+    REQUIRE(Rational(1,2) / Rational(1,2) == Rational(1));
+    REQUIRE(Rational(1,2) / Rational(-1,2) == Rational(-1));
+}
