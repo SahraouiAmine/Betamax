@@ -65,3 +65,7 @@ TEST_CASE("Rationals can be ordered", "[rational]") {
 TEST_CASE("Rationals can be added together", "[rational]") {
     REQUIRE(Rational(1,2) + Rational(1,3) == Rational(5,6));
 }
+
+TEST_CASE("Rational can be multiplied together", "[rational]") {
+    REQUIRE(Rational(1,2) * Rational(1,3) == Rational(1,6));
+}
