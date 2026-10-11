@@ -1,7 +1,7 @@
 # Betamax
 
-Zetamac-style arithmetic plus percentages,
-fractions, expected value and probability, in the CLI with local stats tracking.
+A terminal mental-math trainer: Zetamac-style arithmetic plus expected value and
+probability problems, with precise timing and local stats tracking.
 
 ## Building from source
 
