@@ -82,4 +82,5 @@ TEST_CASE("Rationals can be divided by other Rationals","[rational]") {
     REQUIRE(Rational(1,2) / Rational(1,3) == Rational(3,2));
     REQUIRE(Rational(1,2) / Rational(1,2) == Rational(1));
     REQUIRE(Rational(1,2) / Rational(-1,2) == Rational(-1));
+    REQUIRE_THROWS_AS(Rational(1, 2) / Rational(0), std::invalid_argument);
 }
