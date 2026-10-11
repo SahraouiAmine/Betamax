@@ -1,0 +1,20 @@
+# Static analysis, enforced in CI. Pinned to clang-tidy 22.1.8.
+# Families: bugprone (likely bugs), performance, modernize (C++20 idioms),
+# a few readability checks, and the C++ Core Guidelines' narrowing check
+# (e.g. storing an int64_t in an int).
+Checks: >
+  -*,
+  bugprone-*,
+  performance-*,
+  modernize-*,
+  readability-braces-around-statements,
+  readability-const-return-type,
+  readability-redundant-*,
+  readability-make-member-function-const,
+  cppcoreguidelines-narrowing-conversions,
+  -bugprone-easily-swappable-parameters,
+  -modernize-use-trailing-return-type
+WarningsAsErrors: '*'
+# Only report problems in our own headers, never in fetched dependencies.
+HeaderFilterRegex: '/(src|tests)/'
+ExcludeHeaderFilterRegex: '/_deps/'

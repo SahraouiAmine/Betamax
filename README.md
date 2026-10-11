@@ -26,6 +26,25 @@ ctest --preset dev            # run tests
 Other presets: `release`, and `ci` / `ci-asan` (with `-Werror`, as run in
 GitHub Actions).
 
+## Formatting and static analysis
+
+CI checks formatting with clang-format and runs clang-tidy, both pinned to
+22.1.8 because other versions format and diagnose differently. Install the
+same versions locally (with [uv](https://docs.astral.sh/uv/), or `pipx`):
+
+```bash
+uv tool install clang-format==22.1.8
+uv tool install clang-tidy==22.1.8
+```
+
+```bash
+tools/format.sh            # format every C++ file in place
+tools/format.sh --check    # fail if anything is unformatted (as CI does)
+tools/tidy.sh              # clang-tidy, using build/dev's compile commands
+```
+
+Rules live in `.clang-format` and `.clang-tidy`.
+
 ## Layout
 
 | Path | Contents |
