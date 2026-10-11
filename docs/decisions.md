@@ -14,4 +14,4 @@
 
 **Decision:** Arithmetic, EVs, and Probabilities will be this set. 
 
-**Why:** High impact for interviews, and from polling friends these are the ones they enjoy the most.
+**Why:** Highest impact problems for interviews, and from polling friends these are the ones they enjoy the most. Also cuts back on the V1 scope which helps ship faster.
