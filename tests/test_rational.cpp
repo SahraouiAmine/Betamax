@@ -59,4 +59,5 @@ TEST_CASE("Rationals can be ordered", "[rational]") {
     REQUIRE(a <= c);
     REQUIRE(a >= c);
     REQUIRE(d < a);
+    REQUIRE(Rational(-1, 2) < Rational(1, 3));
 }
