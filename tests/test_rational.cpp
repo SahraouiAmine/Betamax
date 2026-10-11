@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "core/rational.hpp"
+#include <stdexcept>
 
 TEST_CASE("Irreducible fractions only, less than unity.", "[rational]") {
     Rational r(2, 4);
@@ -29,4 +30,9 @@ TEST_CASE("Integer input is in rational form", "[rational]") {
     Rational r(3);
     REQUIRE(r.num() == 3);
     REQUIRE(r.denom() == 1);
+}
+
+TEST_CASE("Refuse division by zero", "[rational]") {
+    REQUIRE_THROWS_AS(Rational(1, 0), std::invalid_argument);
+    REQUIRE_THROWS_AS(Rational(0, 0), std::invalid_argument);
 }
