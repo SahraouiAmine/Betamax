@@ -8,3 +8,10 @@
 **Consequences:** The generator has a extra work to do: it must keep values small. The biggest risk comes from chained sums with coprime factors, as they can't be reduced along the way by Rational. 
 
 **Verification:** Two verification layers: UBSan and with property tests on generators. We also limit user input to 99,999.
+
+## 2026-11-10: V1 Problem types
+**Context:** We need a finite set of problem types to give the user.
+
+**Decision:** Arithmetic, EVs, and Probabilities will be this set. 
+
+**Why:** High impact for interviews, and from polling friends these are the ones they enjoy the most.
