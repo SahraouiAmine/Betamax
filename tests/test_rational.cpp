@@ -36,3 +36,9 @@ TEST_CASE("Exception is thrown on 0 denominator input", "[rational]") {
     REQUIRE_THROWS_AS(Rational(1, 0), std::invalid_argument);
     REQUIRE_THROWS_AS(Rational(0, 0), std::invalid_argument);
 }
+
+TEST_CASE("Rationals can be compared for equality", "[rational]") {
+    Rational a(1, 2);
+    Rational b(2, 4);
+    REQUIRE(a == b);
+}
