@@ -21,11 +21,11 @@ public:
     }
 
     friend Rational operator+(const Rational& lhs, const Rational& rhs) {
-        return Rational(lhs.num_ * rhs.den_ + lhs.den_ * rhs.num_, lhs.den_ * rhs.den_);
+        return {lhs.num_ * rhs.den_ + lhs.den_ * rhs.num_, lhs.den_ * rhs.den_};
     }
 
     friend Rational operator*(const Rational& lhs, const Rational& rhs) {
-        return Rational(lhs.num_ * rhs.num_, lhs.den_ * rhs.den_);
+        return {lhs.num_ * rhs.num_, lhs.den_ * rhs.den_};
     }
 
     friend Rational operator-(const Rational& lhs, const Rational& rhs) {
