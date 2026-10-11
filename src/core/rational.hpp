@@ -15,6 +15,7 @@ class Rational {
         }
 
         friend std::strong_ordering operator<=>(const Rational& lhs, const Rational& rhs) {
+            // valid because denominators are always positive
             return (lhs.num_ * rhs.den_) <=> (rhs.num_ * lhs.den_);
         }
 
