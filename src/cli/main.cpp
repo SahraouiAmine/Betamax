@@ -3,12 +3,15 @@
 #include <CLI/CLI.hpp>
 
 #include <cstdint>
+#include <exception>
 #include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
 
-int main(int argc, char** argv) {
+namespace {
+
+int run(int argc, char** argv) {
   CLI::App app{"Mental-math trainer", BETAMAX_APP_NAME};
   app.set_version_flag("--version", std::string(BETAMAX_APP_NAME) + " " + BETAMAX_VERSION);
 
@@ -34,4 +37,17 @@ int main(int argc, char** argv) {
 
   std::cerr << "drill session: not implemented yet (M3/M5)\n";
   return 1;
+}
+
+}  // namespace
+
+// An exception escaping main skips stack unwinding (and with it, restoring the
+// terminal once the TUI exists), so report it and exit cleanly instead.
+int main(int argc, char** argv) {
+  try {
+    return run(argc, argv);
+  } catch (const std::exception& e) {
+    std::cerr << BETAMAX_APP_NAME << ": " << e.what() << '\n';
+    return 1;
+  }
 }
