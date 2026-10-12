@@ -24,6 +24,12 @@ TEST_CASE("Five digits is the maximum", "[answer]") {
     REQUIRE(parse_answer("123456") == std::nullopt);
 }
 
+TEST_CASE("Leading zeros are allowed and count toward the five digits", "[answer]") {
+    REQUIRE(parse_answer("007") == Rational(7));
+    REQUIRE(parse_answer("00000") == Rational(0));
+    REQUIRE(parse_answer("000007") == std::nullopt);
+}
+
 TEST_CASE("Empty and partial input is rejected", "[answer]") {
     REQUIRE(parse_answer("") == std::nullopt);
     REQUIRE(parse_answer("-") == std::nullopt);
@@ -34,6 +40,12 @@ TEST_CASE("Anything but digits is rejected", "[answer]") {
     REQUIRE(parse_answer(" 1") == std::nullopt);
     REQUIRE(parse_answer("1 ") == std::nullopt);
     REQUIRE(parse_answer("+1") == std::nullopt);
+}
+
+TEST_CASE("Only ASCII digits count as digits", "[answer]") {
+    REQUIRE(parse_answer("²") == std::nullopt);  // superscript two
+    REQUIRE(parse_answer("１") == std::nullopt); // fullwidth digit one
+    REQUIRE(parse_answer("٣") == std::nullopt);  // Arabic-Indic digit three
 }
 
 TEST_CASE("Decimals and fractions are not accepted yet", "[answer]") {
