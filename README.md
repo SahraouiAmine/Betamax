@@ -53,6 +53,13 @@ tools/tidy.sh              # clang-tidy, using build/dev's compile commands
 
 Rules live in `.clang-format` and `.clang-tidy`.
 
+To have git refuse commits with unformatted code, enable the pre-commit hook
+once per clone:
+
+```bash
+git config core.hooksPath tools/hooks
+```
+
 ## Releasing
 
 The version lives in `CMakeLists.txt` (`project(betamax VERSION x.y.z)`).
