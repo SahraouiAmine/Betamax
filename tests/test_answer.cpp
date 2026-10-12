@@ -1,9 +1,4 @@
 // Tests for issue #20: parsing whole-number answers (the v0.1 subset of #5).
-//
-// Proposed interface (yours to change): core/answer.hpp declares
-//     std::optional<Rational> parse_answer(std::string_view input);
-// It returns a Rational, not an integer, so decimals and fractions (#5) can be
-// added later without changing callers.
 
 #include "core/answer.hpp"
 #include "core/rational.hpp"
