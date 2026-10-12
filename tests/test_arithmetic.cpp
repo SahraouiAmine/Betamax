@@ -1,31 +1,5 @@
 // Tests for issue #21: Zetamac-style arithmetic problems.
 //
-// Proposed interface (yours to change; CLAUDE.md "Core design"):
-//
-//   core/problem.hpp
-//     enum class Op { Add, Sub, Mul, Div };
-//     struct ArithmeticSpec {            // the ProblemSpec for arithmetic
-//         Op op;
-//         std::int64_t lhs;
-//         std::int64_t rhs;
-//         friend bool operator==(const ArithmeticSpec&, const ArithmeticSpec&) = default;
-//     };
-//     Rational answer_of(const ArithmeticSpec& spec);  // exact result of lhs op rhs
-//
-//   core/generators/arithmetic.hpp
-//     struct Range { std::int64_t min; std::int64_t max; };  // inclusive
-//     struct ArithmeticConfig {          // defaults are Zetamac's
-//         Range add_left{2, 100};
-//         Range add_right{2, 100};
-//         Range mul_left{2, 12};
-//         Range mul_right{2, 100};
-//         std::vector<Op> ops{Op::Add, Op::Sub, Op::Mul, Op::Div};
-//     };
-//     ArithmeticSpec generate_arithmetic(const ArithmeticConfig& config, std::mt19937_64& rng);
-//
-//   core/wording.hpp
-//     class TemplateWording { public: std::string prompt(const ArithmeticSpec& spec) const; };
-//
 // Subtraction and division are addition and multiplication in reverse, so every
 // answer is a whole number:  (a + b) − a = b   and   (a × b) ÷ a = b.
 
