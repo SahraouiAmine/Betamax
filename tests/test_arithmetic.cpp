@@ -23,14 +23,14 @@ bool in(Range r, std::int64_t x) {
 }
 
 // Draws kDraws problems of a single operation from a fixed seed.
-std::vector<ArithmeticSpec> draw(Op op, ArithmeticConfig config = {}) {
+std::vector<ArithmeticParams> draw(Op op, ArithmeticConfig config = {}) {
     config.ops = {op};
     std::mt19937_64 rng(42);
-    std::vector<ArithmeticSpec> specs;
+    std::vector<ArithmeticParams> params;
     for (int i = 0; i < kDraws; ++i) {
-        specs.push_back(generate_arithmetic(config, rng));
+        params.push_back(generate_arithmetic(config, rng));
     }
-    return specs;
+    return params;
 }
 
 } // namespace
