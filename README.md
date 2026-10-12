@@ -3,6 +3,14 @@
 A terminal mental-math trainer: Zetamac-style arithmetic plus expected value and
 probability problems, with precise timing and local stats tracking.
 
+## Install
+
+```bash
+brew install sahraouiamine/betamax/betamax
+```
+
+Prebuilt for macOS (Apple Silicon and Intel, macOS 13+) and Linux x86_64.
+
 ## Building from source
 
 Requirements: a C++20 compiler (Clang 15+ / GCC 12+), CMake ≥ 3.25, Ninja,
@@ -44,6 +52,21 @@ tools/tidy.sh              # clang-tidy, using build/dev's compile commands
 ```
 
 Rules live in `.clang-format` and `.clang-tidy`.
+
+## Releasing
+
+The version lives in `CMakeLists.txt` (`project(betamax VERSION x.y.z)`).
+Bump it in a PR, merge, then tag the merge commit:
+
+```bash
+git switch main && git pull
+git tag v0.0.1 && git push origin v0.0.1
+```
+
+The tag triggers `.github/workflows/release.yml`, which checks the tag matches
+the version, builds the binaries and publishes a GitHub Release. Then update
+the URLs and checksums in `Formula/betamax.rb` in
+[homebrew-betamax](https://github.com/SahraouiAmine/homebrew-betamax).
 
 ## Layout
 
