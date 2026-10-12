@@ -1,6 +1,8 @@
 #pragma once
-#include "rational.hpp"
+#include "core/rational.hpp"
+
 #include <optional>
 #include <string_view>
 
-std::optional<Rational> parse_answer(std::string_view input);
+// accepts 1 to 5 ASCII digits
+[[nodiscard]] std::optional<Rational> parse_answer(std::string_view input);
