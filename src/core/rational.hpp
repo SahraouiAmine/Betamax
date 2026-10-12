@@ -1,6 +1,8 @@
 #pragma once
 #include <compare>
 #include <cstdint>
+#include <optional>
+#include <string>
 
 // A Rational is always stored in irreducible form with a positive denominator.
 // Constructor throws "std::invalid_argument" if the denominator is 0.
@@ -35,6 +37,10 @@ public:
     friend Rational operator/(const Rational& lhs, const Rational& rhs) {
         return lhs * Rational(rhs.den_, rhs.num_);
     }
+
+    [[nodiscard]] std::optional<std::string> to_decimal() const;
+
+
 
 private:
     std::int64_t num_;

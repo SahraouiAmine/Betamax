@@ -86,3 +86,30 @@ TEST_CASE("Rationals can be divided by other Rationals", "[rational]") {
     REQUIRE(Rational(1, 2) / Rational(-1, 2) == Rational(-1));
     REQUIRE_THROWS_AS(Rational(1, 2) / Rational(0), std::invalid_argument);
 }
+
+TEST_CASE("Rationals can be formatted as decimals", "[rational]") {
+    Rational a(1, 8);
+    REQUIRE(a.to_decimal().value() == "0.125");
+
+    Rational b(3);
+    REQUIRE(b.to_decimal().value() == "3");
+
+    Rational c(-1, 4);
+    REQUIRE(c.to_decimal().value() == "-0.25");
+
+    Rational d(1, 40);
+    REQUIRE(d.to_decimal().value() == "0.025");
+
+    Rational e(1, 7);
+    REQUIRE(e.to_decimal() == std::nullopt);
+
+    Rational f(1, 9);
+    REQUIRE(f.to_decimal() == std::nullopt);
+
+    Rational g(-1, 40);
+    REQUIRE(g.to_decimal().value() == "-0.025");
+
+    Rational h(1, 65536);
+    REQUIRE(h.to_decimal().value() == "0.0000152587890625");
+
+}
