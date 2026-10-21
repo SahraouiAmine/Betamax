@@ -102,7 +102,7 @@ TEST_CASE("Custom ranges are respected", "[arithmetic]") {
     }
 }
 
-TEST_CASE("Left and right ranges are independent", "[arithmetic]") {
+TEST_CASE("Addend ranges are independent", "[arithmetic]") {
     // The default addition ranges are equal, so mixing them up goes unnoticed
     // unless they differ.
     const ArithmeticConfig config{.add_left = {.min = 1, .max = 9},
@@ -114,6 +114,21 @@ TEST_CASE("Left and right ranges are independent", "[arithmetic]") {
     for (const auto& s : draw(Op::Sub, config)) {
         REQUIRE(in(config.add_left, s.rhs));
         REQUIRE(in(config.add_right, s.lhs - s.rhs));
+    }
+}
+
+TEST_CASE("Factor ranges are independent", "[arithmetic]") {
+    // The default factor ranges overlap, so a division that only ever uses the
+    // left range (a × a ÷ a) goes unnoticed unless they don't.
+    const ArithmeticConfig config{.mul_left = {.min = 2, .max = 9},
+                                  .mul_right = {.min = 50, .max = 60}};
+    for (const auto& s : draw(Op::Mul, config)) {
+        REQUIRE(in(config.mul_left, s.lhs));
+        REQUIRE(in(config.mul_right, s.rhs));
+    }
+    for (const auto& s : draw(Op::Div, config)) {
+        REQUIRE(in(config.mul_left, s.rhs));
+        REQUIRE(in(config.mul_right, s.lhs / s.rhs));
     }
 }
 
