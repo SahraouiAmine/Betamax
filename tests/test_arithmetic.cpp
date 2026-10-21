@@ -102,6 +102,21 @@ TEST_CASE("Custom ranges are respected", "[arithmetic]") {
     }
 }
 
+TEST_CASE("Left and right ranges are independent", "[arithmetic]") {
+    // The default addition ranges are equal, so mixing them up goes unnoticed
+    // unless they differ.
+    const ArithmeticConfig config{.add_left = {.min = 1, .max = 9},
+                                  .add_right = {.min = 50, .max = 60}};
+    for (const auto& s : draw(Op::Add, config)) {
+        REQUIRE(in(config.add_left, s.lhs));
+        REQUIRE(in(config.add_right, s.rhs));
+    }
+    for (const auto& s : draw(Op::Sub, config)) {
+        REQUIRE(in(config.add_left, s.rhs));
+        REQUIRE(in(config.add_right, s.lhs - s.rhs));
+    }
+}
+
 TEST_CASE("Ranges are inclusive at both ends", "[arithmetic]") {
     // With 10,000 draws over 99 values, missing an endpoint means an
     // off-by-one, not bad luck.
