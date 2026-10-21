@@ -3,6 +3,7 @@
 #include "core/generators/arithmetic.hpp"
 
 #include <format>
+#include <stdexcept>
 #include <string>
 
 struct TemplateWording {

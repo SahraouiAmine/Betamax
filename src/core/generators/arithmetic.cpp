@@ -3,6 +3,7 @@
 #include "core/rational.hpp"
 
 #include <random>
+#include <stdexcept>
 
 ArithmeticParams generate_arithmetic(const ArithmeticConfig& config, std::mt19937_64& rng) {
 
