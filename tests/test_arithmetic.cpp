@@ -27,6 +27,7 @@ std::vector<ArithmeticParams> draw(Op op, ArithmeticConfig config = {}) {
     config.ops = {op};
     std::mt19937_64 rng(42);
     std::vector<ArithmeticParams> params;
+    params.reserve(kDraws);
     for (int i = 0; i < kDraws; ++i) {
         params.push_back(generate_arithmetic(config, rng));
     }
@@ -93,7 +94,8 @@ TEST_CASE("Every answer is a whole number a player can type", "[arithmetic]") {
 }
 
 TEST_CASE("Custom ranges are respected", "[arithmetic]") {
-    const ArithmeticConfig config{.add_left = {1, 9}, .add_right = {1, 9}};
+    const ArithmeticConfig config{.add_left = {.min = 1, .max = 9},
+                                  .add_right = {.min = 1, .max = 9}};
     for (const auto& s : draw(Op::Add, config)) {
         REQUIRE(in({1, 9}, s.lhs));
         REQUIRE(in({1, 9}, s.rhs));
