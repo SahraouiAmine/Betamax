@@ -1,0 +1,4 @@
+# Tests seed their generators with constants on purpose: a fixed seed makes
+# every run draw the same problems, so a failure is reproducible.
+InheritParentConfig: true
+Checks: -bugprone-random-generator-seed
