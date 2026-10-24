@@ -1,6 +1,7 @@
 include(FetchContent)
 
 # Release tarballs pinned by hash: reproducible, and faster than git clones.
+# Pin releases at least two weeks old, so a bad release has time to be noticed.
 
 set(FTXUI_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(FTXUI_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -15,7 +16,24 @@ FetchContent_Declare(cli11
   URL https://github.com/CLIUtils/CLI11/archive/refs/tags/v2.7.2.tar.gz
   URL_HASH SHA256=46eef3101da70852ec7af026e09d485ccee81813331c8c6052d39344443b83da)
 
-FetchContent_MakeAvailable(ftxui cli11)
+# HTTPS, compression and the install target are off: the server sits behind
+# Fly's proxy, which terminates TLS. This also keeps the build from picking up
+# whatever OpenSSL/zlib/brotli happens to be installed on the machine.
+set(HTTPLIB_USE_OPENSSL_IF_AVAILABLE OFF CACHE BOOL "" FORCE)
+set(HTTPLIB_USE_ZLIB_IF_AVAILABLE OFF CACHE BOOL "" FORCE)
+set(HTTPLIB_USE_BROTLI_IF_AVAILABLE OFF CACHE BOOL "" FORCE)
+set(HTTPLIB_USE_ZSTD_IF_AVAILABLE OFF CACHE BOOL "" FORCE)
+set(HTTPLIB_INSTALL OFF CACHE BOOL "" FORCE)
+FetchContent_Declare(httplib
+  URL https://github.com/yhirose/cpp-httplib/archive/refs/tags/v0.60.1.tar.gz
+  URL_HASH SHA256=f42fc046e55f968a9dd43b272251f033b08538d3e359235608f980f551053215)
+
+# The release's json.tar.xz holds only the library, not the 200 MB repo.
+FetchContent_Declare(json
+  URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+  URL_HASH SHA256=42f6e95cad6ec532fd372391373363b62a14af6d771056dbfc86160e6dfff7aa)
+
+FetchContent_MakeAvailable(ftxui cli11 httplib json)
 
 if(BETAMAX_BUILD_TESTS)
   FetchContent_Declare(catch2

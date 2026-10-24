@@ -17,7 +17,7 @@ option(BETAMAX_SANITIZE "Build everything with ASan + UBSan" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(CompilerOptions)   # betamax_warnings target, sanitizer flags
-include(Dependencies)      # FetchContent: FTXUI, CLI11, Catch2; system SQLite
+include(Dependencies)      # FetchContent: FTXUI, CLI11, httplib, json, Catch2; system SQLite
 include(BetamaxModule)     # betamax_add_module()
 
 # One library per area under src/. Sources are globbed, so adding a .cpp file
@@ -26,6 +26,8 @@ betamax_add_module(core)
 betamax_add_module(session betamax::core)
 betamax_add_module(store   betamax::core ${BETAMAX_SQLITE_TARGET})
 betamax_add_module(tui     betamax::core betamax::session ftxui::ftxui)
+betamax_add_module(api     betamax::core betamax::session
+                           httplib::httplib nlohmann_json::nlohmann_json)
 
 add_executable(betamax src/cli/main.cpp)
 target_compile_definitions(betamax PRIVATE
