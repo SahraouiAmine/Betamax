@@ -37,7 +37,14 @@ target_link_libraries(betamax PRIVATE
   betamax_warnings CLI11::CLI11
   betamax::core betamax::session betamax::store betamax::tui)
 
-install(TARGETS betamax RUNTIME DESTINATION bin)
+add_executable(betamax-server src/server/main.cpp)
+target_compile_definitions(betamax-server PRIVATE
+  BETAMAX_APP_NAME="${PROJECT_NAME}-server"
+  BETAMAX_VERSION="${PROJECT_VERSION}")
+target_link_libraries(betamax-server PRIVATE
+  betamax_warnings CLI11::CLI11 betamax::api)
+
+install(TARGETS betamax betamax-server RUNTIME DESTINATION bin)
 
 if(BETAMAX_BUILD_TESTS)
   enable_testing()

@@ -15,3 +15,7 @@ endif()
 add_test(NAME cli.version COMMAND betamax --version)
 set_tests_properties(cli.version PROPERTIES
   PASS_REGULAR_EXPRESSION "${PROJECT_VERSION}")
+
+add_test(NAME server.version COMMAND betamax-server --version)
+set_tests_properties(server.version PROPERTIES
+  PASS_REGULAR_EXPRESSION "${PROJECT_VERSION}")
